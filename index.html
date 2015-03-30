@@ -2,177 +2,23 @@
 
 <html lang="en-us">
 <head>
-    <style>
-        *{
-            font-family: "Segoe UI light";
-        }
-        td,th{
-            border: 1px double lightgrey;
-            font-size: 32px;
-            min-width: 200px;
-            text-align: left;
-         }
-        button{
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-    </style>
-    <script>
-        function olf() {
-            totalcustomer = JSON.parse(localStorage.getItem("creditrecord"));
-            if(totalcustomer == null){
-                totalcustomer = [];
-            }
-            filllist();
-
-        }
-    </script>
-
+    <link rel="stylesheet" href="main.css"/>
 </head>
-    <body onload="olf();">
-
-
-
+<body onload="olf();">
     <h1>Credit Managment System</h1>
     <button onclick="addcustomer();">Add customer</button>
     <button onclick="credit();">Credit</button>
     <button onclick="debit();">Debit</button>
     <button onclick="del();">Delete customer</button>
+    <button onclick="delall();">Delete all customers</button>
 
         <table id="sample">
             <thead>
-            <tr><th>No.</th><th>Name</th><th>Limit</th><th>Current credit</th></tr>
+            <tr><th class="no">No.</th><th>Name</th><th>Limit</th><th>Current credit</th></tr>
             </thead>
-            <tr><td id="no."></td><td id="namelist"></td><td id="limitlist"></td><td id="currentlist"></td></tr>
+            <tr><td class="no" id="no."></td><td id="namelist"></td><td id="limitlist"></td><td id="currentlist"></td></tr>
         </table>
 
-
-
-    <script>
-
-
-
-
-        function Client(name,limit,current){
-            this.name = name;
-            this.limit = limit;
-            this.current = current;
-        }
-        function clearlist() {
-            document.getElementById("namelist").innerHTML    = "";
-            document.getElementById("limitlist").innerHTML   = "";
-            document.getElementById("currentlist").innerHTML = "";
-            document.getElementById("no.").innerHTML = "";
-        }
-        function filllist() {
-            for(i=0;i<totalcustomer.length;i++){
-                document.getElementById("namelist").innerHTML += totalcustomer[i].name + "<br />" ;
-                document.getElementById("limitlist").innerHTML += totalcustomer[i].limit + "<br />" ;
-                document.getElementById("currentlist").innerHTML += totalcustomer[i].current + "<br />" ;
-                document.getElementById("no.").innerHTML += i+1 + "<br />" ;
-
-        }
-        }
-        function addcustomer() {
-       var a = prompt("customer name","");
-            if(a == ""){
-                alert("you leave box empty");
-                return;
-            }
-            if(a.indexOf(" ") !== -1){
-                alert("space is not allowed in name");
-                return;
-            }
-            if(a.length > 10){
-                alert("plese enter name under ten charecters");
-                return;
-            }
-            for(i=0;i<totalcustomer.length;i++){
-                if(a == totalcustomer[i].name){
-                    alert("this name already exists, plz enter some different name");
-                    return;
-                }
-            }
-
-       var b = +prompt("credit limit","");
-
-            if(isNaN(b)){
-                alert("Error: please enter amount in digits");
-                return;
-            }
-            if(b<=0){
-                alert("limit can not be zero or negative");
-                return;
-            }
-
-
-       var c = +prompt("current credit","");
-
-            if(isNaN(c)){
-                alert("Error: please enter amount in digits");
-                return;
-            }
-            if(c>b){
-                alert("Error: current credit can not be more then limit");
-                return;
-            }
-
-
-
-            var newcustomer = new Client(a,b,c);
-
-                totalcustomer.push(newcustomer);
-            localStorage.setItem("creditrecord",JSON.stringify(totalcustomer));
-
-            clearlist();
-            filllist();
-
-
-        }
-        function credit(){
-            var a = prompt("enter name");
-
-            for(i=0;i<totalcustomer.length;i++){
-                if(a == totalcustomer[i].name){
-
-
-                    var b = +prompt("enter amount");
-                    if(isNaN(b)){
-                        alert("Error: please enter amount in digits");
-                        return;
-                    }
-                    if(b<=0){
-                        alert("amount can not be negative or zero");
-                    }
-                    if(b>totalcustomer[i].limit){
-                        alert("your limit is: " + totalcustomer[i].limit );
-                    }else if(b > (totalcustomer[i].limit-totalcustomer[i].current))
-
-                    alert("sorry in this situation you can get only " + (totalcustomer[i].limit-totalcustomer[i].current));
-
-
-                }
-
-            }
-        }
-        function debit(){
-
-        }
-        function del(){
-            localStorage.clear();
-            clearlist();
-
-        }
-
-
-    </script>
-    </body>
-
-
-
-
-
-
-
+    <script src="main.js"></script>
+</body>
 </html>
