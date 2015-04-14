@@ -17,6 +17,7 @@ td,th{
 }
 .no{
     min-width: 60px;
+    text-align: center;
 }
 
 button{
