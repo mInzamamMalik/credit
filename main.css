@@ -1,6 +1,14 @@
 *{
     font-family: "Segoe UI light";
 }
+
+body{
+    background-image: url("img/back.png");
+}
+
+table,h1{
+    color: white;
+}
 td,th{
     border: 1px double lightgrey;
     font-size: 32px;
@@ -14,4 +22,5 @@ td,th{
 button{
     font-size: 16px;
     font-weight: bold;
+    background: linear-gradient(white,gray);
 }
